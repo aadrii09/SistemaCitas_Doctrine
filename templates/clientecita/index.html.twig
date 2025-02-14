@@ -3,29 +3,41 @@
 {% block title %}Hello ClientecitaController!{% endblock %}
 
 {% block body %}
-<table>
-<thead>
-<tr>
-            <th>Nombre Cliente</th>
-            <th>Fecha</th>
-            <th>Hora</th>
-            <th>Motivo</th>
-            <th>Localizacion</th>
-            <th>Confirmacion</th>
-<tr>
-</thead>
-<tbody>
-<p>{{ cuenta }}</p>
-{% for cliente in listaClientes %}
-    <tr>
-    <td>{{cliente.nombre}}</td>
-    <td>{{cliente.fecha}}</td>
-    <td>{{cliente.hora}}</td>
-    <td>{{cliente.motivo}}</td>
-    <td>{{cliente.localizacion}}</td>
-    <td>{{cliente.confirmada}}</td>
-    </tr>
-{% endfor %}
-</tbody>
-</table>
+<div class="container mt-4">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nombre Cliente</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Motivo</th>
+                <th>Localización</th>
+                <th>Confirmación</th>
+                <th>Acciones</th> 
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in listaClientes %}
+                <tr>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.fecha|date('Y-m-d') }}</td>
+                    <td>{{ cliente.hora|date('H:i:s') }}</td>
+                    <td>{{ cliente.motivo }}</td>
+                    <td>{{ cliente.localizacion }}</td>
+                    <td>{{ cliente.confirmada ? 'Sí' : 'No' }}</td>
+                    <td>
+                        <!-- Botón para editar -->
+                        <a href="{{ path('editar_cliente', {'id': cliente.id}) }}" class="btn btn-warning btn-sm">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
+                        <!-- Botón para eliminar -->
+                        <a href="{{ path('eliminar_cliente', {'id': cliente.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
