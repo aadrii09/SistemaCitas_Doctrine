@@ -13,7 +13,7 @@
                 <th>Motivo</th>
                 <th>Localización</th>
                 <th>Confirmación</th>
-                <th>Acciones</th> 
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
                     <td>{{ cliente.confirmada ? 'Sí' : 'No' }}</td>
                     <td>
                         <!-- Botón para editar -->
-                        <a href="{{ path('editar_cliente', {'id': cliente.id}) }}" class="btn btn-warning btn-sm">
+                        <a href="" class="btn btn-info btn-sm">
                             <i class="bi bi-pencil"></i> Editar
                         </a>
                         <!-- Botón para eliminar -->
@@ -39,5 +39,12 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <!-- Botón "Crear" -->
+    <div class="text-start"> 
+        <a href="#" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Crear
+        </a>
+    </div>
 </div>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Cliente;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -23,4 +24,21 @@ final class ClientecitaController extends AbstractController
             'cuenta'=>$cuenta,
         ]);
     }
+
+
+    #[Route('/cliente/eliminar/{id}', name: 'eliminar_cliente')]
+    public function eliminar(int $id, ManagerRegistry $doctrine): Response
+    {
+        $cliente = $doctrine->getRepository(Cliente::class)->find($id);
+        if (!$cliente) {
+            throw $this->createNotFoundException('Cliente no encontrado');
+        }
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($cliente);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('listar');
+    }
+
 }
