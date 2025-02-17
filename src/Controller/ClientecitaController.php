@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Cliente;
+use App\Form\CitasFormType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,6 +41,22 @@ final class ClientecitaController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('listar');
+    }
+    
+    #[Route('/cliente/crear', name: 'crear_cliente')]
+    public function crear(Request $request , EntityManagerInterface $entityManagerInterface): Response
+    {
+        $crearCliente=new Cliente;
+        $form=$this->createForm(CitasFormType::class, $crearCliente);
+        $form->handleRequest($request);
+        if($form->isSubmitted()&& $form->isValid()){
+            $entityManagerInterface->persist($crearCliente);
+            $entityManagerInterface->flush();
+            return $this->redirectToRoute("listar");
+        }
+        return $this->render('clientecita/new.html.twig', [
+            "form"=>$form->createView(),
+        ]);
     }
 
 }

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h2 class="mb-4">Formulario de Citas</h2>
+        
+        {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+        
+        <div class="mb-3">
+            {{ form_label(form.nombre, 'Nombre', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.nombre, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.nombre) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.fecha, 'Fecha', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.fecha, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.fecha) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.hora, 'Hora', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.hora, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.hora) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.motivo, 'Motivo', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.motivo, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.motivo) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.localizacion, 'Localización', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.localizacion, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.localizacion) }}
+        </div>
+
+        <div class="mb-3 form-check">
+            {{ form_widget(form.confirmada, {'attr': {'class': 'form-check-input'}}) }}
+            {{ form_label(form.confirmada, 'Confirmada', {'label_attr': {'class': 'form-check-label'}}) }}
+            {{ form_errors(form.confirmada) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar Cita</button>
+        
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

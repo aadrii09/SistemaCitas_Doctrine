@@ -15,7 +15,7 @@
                 <th>Confirmación</th>
                 <th>Acciones</th>
             </tr>
-        </thead>
+        </thead> 
         <tbody>
             {% for cliente in listaClientes %}
                 <tr>
@@ -42,7 +42,7 @@
 
     <!-- Botón "Crear" -->
     <div class="text-start"> 
-        <a href="#" class="btn btn-primary">
+        <a href="{{path('crear_cliente')}}" class="btn btn-primary">
             <i class="bi bi-plus-circle"></i> Crear
         </a>
     </div>
