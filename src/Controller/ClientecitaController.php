@@ -59,4 +59,19 @@ final class ClientecitaController extends AbstractController
         ]);
     }
 
+    #[Route('/cliente/editar/{id}', name: 'editar_cliente')]
+    public function editar(Cliente $cliente, Request $request , EntityManagerInterface $entityManagerInterface): Response
+    {
+       
+        $form=$this->createForm(CitasFormType::class, $cliente);
+        $form->handleRequest($request);
+        if($form->isSubmitted()&& $form->isValid()){
+            $entityManagerInterface->flush();
+            return $this->redirectToRoute("listar");
+        }
+        return $this->render('clientecita/new.html.twig', [
+            "form"=>$form->createView(),
+        ]);
+    }
+
 }
