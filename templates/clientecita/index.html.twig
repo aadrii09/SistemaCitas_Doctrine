@@ -3,6 +3,9 @@
 {% block title %}Hello ClientecitaController!{% endblock %}
 
 {% block body %}
+ <form method="post" action="{{ path('app_logout') }}">
+    <button type="submit">Cerrar sesión</button>
+</form>
 <div class="container mt-4">
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
